@@ -13,9 +13,5 @@ func Run(listen string, logger *log.Logger) error {
 	s := &server{logger, listen, fetcher}
 	s.Routes()
 
-	if err := s.Run(); err != nil {
-		return err
-	}
-
-	return nil
+	return s.Run()
 }
