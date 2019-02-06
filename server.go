@@ -22,7 +22,7 @@ func (s *server) handleFavicon() http.HandlerFunc {
 	}
 }
 
-func (s *server) handler() http.HandlerFunc {
+func (s *server) handleIndex() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		version := parseVersion(r.URL.Path)
 
@@ -44,7 +44,7 @@ func (s *server) handler() http.HandlerFunc {
 
 func (s *server) Routes() {
 	http.HandleFunc("/favicon.ico", s.handleFavicon())
-	http.HandleFunc("/", s.handler())
+	http.HandleFunc("/", s.handleIndex())
 }
 
 func (s *server) Run() error {
