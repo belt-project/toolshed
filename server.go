@@ -33,12 +33,19 @@ func (s *server) handleIndex() http.HandlerFunc {
 			return
 		}
 
-		v := fmt.Sprintf(`BELT_VERSION="%s"`, version)
-		script = strings.Replace(script, `BELT_VERSION="master"`, v, 1)
+		if version != "master" {
+			val := fmt.Sprintf(`BELT_VERSION="%s"`, version)
+			script = strings.Replace(script, `BELT_VERSION="master"`, val, 1)
+		}
 
 		if prefix := r.URL.Query().Get("prefix"); prefix != "" {
-			p := fmt.Sprintf(`BELT_LIB_PREFIX="%s"`, prefix)
-			script = strings.Replace(script, `BELT_LIB_PREFIX="/usr/local/lib"`, p, 1)
+			val := fmt.Sprintf(`BELT_LIB_PREFIX="%s"`, prefix)
+			script = strings.Replace(script, `BELT_LIB_PREFIX="/usr/local/lib"`, val, 1)
+		}
+
+		if toolbox := r.URL.Query().Get("toolbox"); toolbox != "" {
+			val := fmt.Sprintf(`BELT_TOOLBOX="%s"`, toolbox)
+			script = strings.Replace(script, `BELT_TOOLBOX=""`, val, 1)
 		}
 
 		s.logger.Printf("request succeeded for %s", version)
