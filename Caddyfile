@@ -1,0 +1,4 @@
+get.belt.sh {
+  proxy / localhost:8080
+  header / -Server
+}
