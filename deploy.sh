@@ -17,7 +17,7 @@ main() {
   app_upload "$ARCHIVE_FILE"
 
   echo "Stopping process"
-  # systemd_unit_stop "toolshed"
+  systemd_unit_stop "toolshed"
 
   echo "Setting up user"
   user_add "toolshed"
