@@ -1,4 +1,4 @@
-get2.belt.sh {
+get.belt.sh {
   proxy / localhost:8081
   header / -Server
 }

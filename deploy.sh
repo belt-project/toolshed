@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-source /dev/stdin <<< "$(curl -Lsm 2 https://get2.belt.sh)"
+source /dev/stdin <<< "$(curl -Lsm 2 https://get.belt.sh)"
 
 ARCHIVE_FILE="/tmp/toolshed.tar.gz"
 
