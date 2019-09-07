@@ -1,0 +1,15 @@
+[Unit]
+Description=toolsheld
+After=network.target
+Requires=network.target
+
+[Service]
+Type=simple
+User=memoir
+Group=memoir
+Restart=always
+RestartSec=5s
+ExecStart=/app/toolshed/toolshed
+
+[Install]
+WantedBy=multi-user.target
