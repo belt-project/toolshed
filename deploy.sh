@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-source /dev/stdin <<< "$(curl -Lsm 2 https://get.belt.sh)"
+source /dev/stdin <<< "$(curl -Lsm 2 https://get2.belt.sh)"
 
 ARCHIVE_FILE="/tmp/toolshed.tar.gz"
 
@@ -17,7 +17,7 @@ main() {
   app_upload "$ARCHIVE_FILE"
 
   echo "Stopping process"
-  systemd_unit_stop "toolshed" || true
+  # systemd_unit_stop "toolshed"
 
   echo "Setting up user"
   user_add "toolshed"

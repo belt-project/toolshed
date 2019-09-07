@@ -5,11 +5,11 @@ Requires=network.target
 
 [Service]
 Type=simple
-User=memoir
-Group=memoir
+User=toolshed
+Group=toolshed
 Restart=always
 RestartSec=5s
-ExecStart=/app/toolshed/toolshed
+ExecStart=/app/toolshed/toolshed --listen ":8081"
 
 [Install]
 WantedBy=multi-user.target
