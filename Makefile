@@ -22,4 +22,7 @@ $(PLATFORMS):
 test:
 	go test ${MODFLAGS} ./...
 
-.PHONY: all clean dev dist $(PLATFORMS) test
+archive: dist
+	bsdtar -zcf /tmp/toolshed.tar.gz -s ,^dist/toolshed-linux-amd64,dist/toolshed, dist/toolshed-linux-amd64 Caddyfile toolshed.service
+
+.PHONY: all clean dev dist $(PLATFORMS) test archive
