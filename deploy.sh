@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
+export BELT_ENV_TOOLBOX_TOOLS="caddy"
+
 source /dev/stdin <<< "$(curl -Lsm 2 https://get.belt.sh)"
 
 ARCHIVE_FILE="/tmp/toolshed.tar.gz"
@@ -35,7 +37,7 @@ main() {
   systemd_unit_start "toolshed"
 
   echo "Adding caddy vhost"
-  app_add_caddy_vhost
+  caddy_add_vhost
 
   echo "Restarting caddy"
   caddy_restart
