@@ -16,12 +16,6 @@ type server struct {
 	fetcher fetcher
 }
 
-func (s *server) handleFavicon() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusNotFound)
-	}
-}
-
 func (s *server) handleIndex() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		version := parseVersion(r.URL.Path)
@@ -43,9 +37,17 @@ func (s *server) handleIndex() http.HandlerFunc {
 	}
 }
 
+func (s *server) handleInvalidate() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		s.fetcher.Invalidate()
+		s.logger.Println("cache invalidated")
+		w.WriteHeader(http.StatusNoContent)
+	}
+}
+
 func (s *server) Routes() {
-	http.HandleFunc("/favicon.ico", s.handleFavicon())
 	http.HandleFunc("/", s.handleIndex())
+	http.HandleFunc("/invalidate", s.handleInvalidate())
 }
 
 func (s *server) Run() error {

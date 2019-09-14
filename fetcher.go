@@ -10,6 +10,7 @@ import (
 
 type fetcher interface {
 	Fetch(string) (string, error)
+	Invalidate()
 }
 
 type githubFetcher struct {
@@ -50,6 +51,12 @@ func (g *githubFetcher) Fetch(version string) (string, error) {
 	g.cachePut(version, script)
 
 	return script, err
+}
+
+func (g *githubFetcher) Invalidate() {
+	g.mu.Lock()
+	defer g.mu.Unlock()
+	g.cache = make(map[string]string)
 }
 
 func (g *githubFetcher) cacheGet(version string) string {
